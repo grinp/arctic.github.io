@@ -1,1 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Perceptual Scaling</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet/v0.7.7/leaflet.css" />
+    
+<style>
+  body { margin:0; padding:0; font-family: sans-serif; }
+  #map { position:absolute; top:0; bottom:0;left: 400px; width:870px; height: 65%; }
+    h1 { position: absolute;left:700px; top: 5px; padding: 8px 2%; margin: 0; background: rgb(255,0,0); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 3px; color: whitesmoke; font-weight: normal; font-size: 1.4em; } 
+ table { width: 400px; left: 4px; }
 
+  
+</style>
+    
+    
+    <!-- css -->
+    <link rel ="stylesheet" href = "main.css" type ="text/css" media = "screen,projection"
+    />
+    
+</head>
+<body>
+ 	
+    
+	
+    <div id='map'></div>
+    <div id="columnchart_values" class = "chart"></div>
+    <h1>COVID-19 in Arctica</h1>
+    
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://d19vzq90twjlae.cloudfront.net/leaflet/v0.7.7/leaflet.js"></script>
+<script src="data.geojson"></script>
+<script src="Arctctic.geojson"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script>
+
+    var map = L.map('map', {
+        center: [72.941873, -2.530650],
+        zoom: 2
+    });
+    
+    L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    
+
+    
+     L.geoJson(Arctic_data, {
+          style: {
+            weight: 1,
+        	color: "#706f6e",
+        	opacity: 1,
+        	fillOpacity: 0
+            
+        }
+         
+        
+    }).addTo(map);
+    
+    
+    
+    
+    // you need to know what the min value is, 
+    // calculated at runtime or prior
+    var minValue = 100;
+    
+    //  minimum desired radius size of circles
+    var minRadius = 8; 
+    
+    
+    
+    
+    geojsonLayer = L.geoJson(data, {
+        pointToLayer: function(feature, ll){
+            return L.circleMarker(ll, {
+                color: '#FF0000',
+                opacity: 1,
+                weight: 2,
+                fillColor: '#FF0000',
+                fillOpacity: .6,
+                //radius: 10
+                radius: calcRadius(feature.properties.Cases)
+             
+             
+            });
+        },
+        
+        onEachFeature: function (feature, layer) {
+            var popupText =
+        		"<b>Region: </b>" + feature.properties.Region +
+        		"<br><b>Cases: </b>: " + feature.properties.Cases +
+        		"<br><b>Deaths: </b>: " + feature.properties.Deaths
+        	
+        	layer.bindPopup(popupText);
+        }
+    });
+
+	map.addLayer(geojsonLayer);
+    
+    function calcRadius(val) {
+        
+        return 1.0083 * Math.pow(val/minValue,.25) * minRadius;  
+        
+    }
+    
+</script>
+
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Element", "Density", { role: "style" } ],
+        ["Russia", 3921, "#F08080"],
+        ["Iceland", 1797, "#F08080"],
+        ["Sweden", 574, "#F08080"],
+        ["United States", 574, "#F08080"],
+        ["Finland", 190, "#F08080"],
+        ["Norway", 114, "#F08080"],
+        ["Canada", 16, "#F08080"],
+        ["Greenland", 11, "#F08080"]
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "COVID-19 Cases by Countries",
+        width: 600,
+        height: 220,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+  </script>
+
+<img src="Arctic_center.png" class = "img">
+
+<table>
+<tr><th>Region</th><th>Cases</th><th>Deaths</th></tr>
+<tr><td>Iceland</td><td>1797</td><td>10</td></tr>
+<tr><td>Murmansk</td><td>1227</td><td>4</td></tr>
+<tr><td>Krasnoyarsk</td><td>666</td><td>8</td></tr>
+<tr><td>Komi</td><td>621</td><td>5</td></tr>
+<tr><td>Yamal-Nenets</td><td>463</td><td>1</td></tr>
+<tr><td>Khanty-Mansiy</td><td>387</td><td>3</td></tr>
+<tr><td>Västerbotten</td><td>322</td><td>15</td></tr>
+<tr><td>Norrbotten</td><td>252</td><td>33</td></tr>
+<tr><td>Troms and Finnmark</td><td>240</td><td>0</td></tr>
+<tr><td>Sakha</td><td>207</td><td>3</td></tr>
+<tr><td>Arkhangel'sk</td><td>198</td><td>1</td></tr>
+<tr><td>Anchorage</td><td>179</td><td>4</td></tr>
+<tr><td>Pohjois-Pohjanmaa</td><td>122</td><td>0</td></tr>
+<tr><td>Nordland</td><td>114</td><td>0</td></tr>
+<tr><td>Magadan</td><td>101</td><td>2</td></tr>
+<tr><td>Fairbanks North Star</td><td>81</td><td>1</td></tr>
+<tr><td>Lapland</td><td>68</td><td>0</td></tr>
+<tr><td>Nenets</td><td>33</td><td>0</td></tr>
+<tr><td>Juneau</td><td>27</td><td>0</td></tr>
+<tr><td>Kenai Peninsula</td><td>19</td><td>0</td></tr>
+<tr><td>Chukot</td><td>18</td><td>0</td></tr>
+<tr><td>Ketchikan Gateway</td><td>16</td><td>0</td></tr>
+<tr><td>Yukon</td><td>11</td><td>0</td></tr>
+<tr><td>Greenland</td><td>11</td><td>0</td></tr>
+<tr><td>Northwest Territories</td><td>5</td><td>0</td></tr>
+<tr><td>Petersburg</td><td>4</td><td>0</td></tr>
+<tr><td>Prince of Wales-Outer Ketchi</td><td>2</td><td>0</td></tr>
+<tr><td>Kodiak Island</td><td>1</td><td>0</td></tr>
+<tr><td>Bethel</td><td>1</td><td>0</td></tr>
+<tr><td>Southeast Fairbanks</td><td>1</td><td>0</td></tr>
+<tr><td>Nome</td><td>1</td><td>0</td></tr>
+<tr><td>Yukon-Koyukuk</td><td>1</td><td>0</td></tr>
+<tr><td>Sitka</td><td>1</td><td>0</td></tr>
+<tr><td></td></tr>
+</table>
+
+
+</body>
+</html>
