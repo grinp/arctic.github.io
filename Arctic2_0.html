@@ -9,12 +9,11 @@
 <style>
   body { margin:0; padding:0; font-family: sans-serif; }
   
-    h1 { position: absolute;left:700px; top: 5px; padding: 8px 2%; margin: 0; background: rgb(255,0,0); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 3px; color: whitesmoke; font-weight: normal; font-size: 1.4em; } 
+    h1 { position: absolute;left:550px; top: 5px; padding: 8px 2%; margin: 0; background: rgb(255,0,0); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 3px; color: whitesmoke; font-weight: normal; font-size: 1.4em; } 
 
 
   
 </style>
-    
     
     <!-- css -->
     <link rel ="stylesheet" href = "main.css" type ="text/css" media = "screen,projection"
@@ -27,13 +26,13 @@
 	
     <div id='map' class = "map"></div>
     <div id="columnchart_values" class = "chart"></div>
-    <h1>COVID-19 in Arctica</h1>
+    <h1> COVID-19 CONFIRMED CASES IN THE ARCTIC REGION</h1>
     
 
 
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://d19vzq90twjlae.cloudfront.net/leaflet/v0.7.7/leaflet.js"></script>
-<script src="data.geojson"></script>
+<script src="data_05042020.geojson"></script>
 <script src="Arctctic.geojson"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -64,8 +63,6 @@
     }).addTo(map);
     
     
-    
-    
     // you need to know what the min value is, 
     // calculated at runtime or prior
     var minValue = 100;
@@ -76,7 +73,7 @@
     
     
     
-    geojsonLayer = L.geoJson(data, {
+    geojsonLayer = L.geoJson(data_05042020, {
         pointToLayer: function(feature, ll){
             return L.circleMarker(ll, {
                 color: '#FF0000',
@@ -120,12 +117,12 @@
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
         ["Element", "Density", { role: "style" } ],
-        ["Russia", 3921, "#F08080"],
-        ["Iceland", 1797, "#F08080"],
-        ["Sweden", 574, "#F08080"],
-        ["United States", 574, "#F08080"],
-        ["Finland", 190, "#F08080"],
-        ["Norway", 114, "#F08080"],
+        ["Russia", 5794, "#F08080"],
+        ["Iceland", 1799, "#F08080"],
+        ["Sweden", 601, "#F08080"],
+        ["United States", 368, "#F08080"],
+        ["Norway", 360, "#F08080"],
+        ["Finland", 140, "#F08080"],
         ["Canada", 16, "#F08080"],
         ["Greenland", 11, "#F08080"]
       ]);
@@ -139,7 +136,7 @@
                        2]);
 
       var options = {
-        title: "COVID-19 Cases by Countries",
+        title: "COVID-19 Cases by Country",
         width: 600,
         height: 220,
         bar: {groupWidth: "95%"},
@@ -150,45 +147,49 @@
   }
   </script>
 
+<a href="https://arctic.uni.edu/">
 <img src="Arctic_center.png" class = "img">
+</a>
 
 <table>
 <tr><th>Region</th><th>Cases</th><th>Deaths</th></tr>
-<tr><td>Iceland</td><td>1797</td><td>10</td></tr>
-<tr><td>Murmansk</td><td>1227</td><td>4</td></tr>
-<tr><td>Krasnoyarsk</td><td>666</td><td>8</td></tr>
-<tr><td>Komi</td><td>621</td><td>5</td></tr>
-<tr><td>Yamal-Nenets</td><td>463</td><td>1</td></tr>
-<tr><td>Khanty-Mansiy</td><td>387</td><td>3</td></tr>
-<tr><td>Västerbotten</td><td>322</td><td>15</td></tr>
-<tr><td>Norrbotten</td><td>252</td><td>33</td></tr>
-<tr><td>Troms and Finnmark</td><td>240</td><td>0</td></tr>
-<tr><td>Sakha</td><td>207</td><td>3</td></tr>
-<tr><td>Arkhangel'sk</td><td>198</td><td>1</td></tr>
-<tr><td>Anchorage</td><td>179</td><td>4</td></tr>
+<tr><td>Murmansk</td><td>1974</td><td>4</td></tr>
+<tr><td>Iceland</td><td>1799</td><td>10</td></tr>
+<tr><td>Krasnoyarsk</td><td>823</td><td>11</td></tr>
+<tr><td>Yamal-Nenets</td><td>712</td><td>3</td></tr>
+<tr><td>Komi</td><td>682</td><td>7</td></tr>
+<tr><td>Khanty-Mansiy</td><td>467</td><td>4</td></tr>
+<tr><td>Kamchatka</td><td>339</td><td>0</td></tr>
+<tr><td>Vдsterbotten</td><td>330</td><td>16</td></tr>
+<tr><td>Sakha</td><td>311</td><td>4</td></tr>
+<tr><td>Arkhangel'sk</td><td>299</td><td>1</td></tr>
+<tr><td>Norrbotten</td><td>271</td><td>35</td></tr>
+<tr><td>Troms and Finnmark</td><td>245</td><td>0</td></tr>
+<tr><td>Anchorage</td><td>187</td><td>4</td></tr>
 <tr><td>Pohjois-Pohjanmaa</td><td>122</td><td>0</td></tr>
-<tr><td>Nordland</td><td>114</td><td>0</td></tr>
-<tr><td>Magadan</td><td>101</td><td>2</td></tr>
-<tr><td>Fairbanks North Star</td><td>81</td><td>1</td></tr>
+<tr><td>Magadan</td><td>116</td><td>2</td></tr>
+<tr><td>Nordland</td><td>115</td><td>0</td></tr>
+<tr><td>Fairbanks North Star</td><td>83</td><td>2</td></tr>
 <tr><td>Lapland</td><td>68</td><td>0</td></tr>
-<tr><td>Nenets</td><td>33</td><td>0</td></tr>
+<tr><td>Nenets</td><td>47</td><td>0</td></tr>
 <tr><td>Juneau</td><td>27</td><td>0</td></tr>
-<tr><td>Kenai Peninsula</td><td>19</td><td>0</td></tr>
-<tr><td>Chukot</td><td>18</td><td>0</td></tr>
+<tr><td>Chukot</td><td>24</td><td>0</td></tr>
+<tr><td>Kenai Peninsula</td><td>22</td><td>1</td></tr>
+<tr><td>Matanuska-Susitna</td><td>21</td><td>1</td></tr>
 <tr><td>Ketchikan Gateway</td><td>16</td><td>0</td></tr>
-<tr><td>Yukon</td><td>11</td><td>0</td></tr>
 <tr><td>Greenland</td><td>11</td><td>0</td></tr>
+<tr><td>Yukon</td><td>11</td><td>0</td></tr>
 <tr><td>Northwest Territories</td><td>5</td><td>0</td></tr>
-<tr><td>Petersburg</td><td>4</td><td>0</td></tr>
+<tr><td>Petersburg</td><td>4</td><td>1</td></tr>
 <tr><td>Prince of Wales-Outer Ketchi</td><td>2</td><td>0</td></tr>
-<tr><td>Kodiak Island</td><td>1</td><td>0</td></tr>
 <tr><td>Bethel</td><td>1</td><td>0</td></tr>
-<tr><td>Southeast Fairbanks</td><td>1</td><td>0</td></tr>
+<tr><td>Kodiak Island</td><td>1</td><td>0</td></tr>
 <tr><td>Nome</td><td>1</td><td>0</td></tr>
-<tr><td>Yukon-Koyukuk</td><td>1</td><td>0</td></tr>
 <tr><td>Sitka</td><td>1</td><td>0</td></tr>
-<tr><td></td></tr>
+<tr><td>Southeast Fairbanks</td><td>1</td><td>0</td></tr>
+<tr><td>Yukon-Koyukuk</td><td>1</td><td>0</td></tr>
 </table>
+
 
 
 </body>
