@@ -15,10 +15,9 @@ table {
 	position: absolute;
 	height: 100%;
 	width: 31.4%;
-	right: 68.6%;
+	
 }
 table th {
-	
 	background-color: #F08080;
 	color: #FFF;
 	padding: 4px 30px 4px 8px;
@@ -29,7 +28,7 @@ table td {
 	border: 1px solid #e3e3e3;
 	padding: 1px 4px;
 	font-size: 80%;
-	
+
   	
 }
 
