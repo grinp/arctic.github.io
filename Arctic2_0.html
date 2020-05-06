@@ -8,7 +8,7 @@
     
 <style>
   body { margin:0; padding:0; font-family: sans-serif; }
-    h1 { position: absolute;left:50%; top: 1%; padding: 2%; margin: 0; background: rgb(255,0,0); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 2%; color: whitesmoke; font-weight: normal; font-size: 120%; } 
+    h1 { position: absolute; left:50%; top: 1%; padding: 0.6%; margin: 0; background: rgb(255,0,0); box-shadow: 0 0 15px rgba(0,0,0,0.2);   height: 5%;  box-sizing: border-box; border-radius: 2%; color: whitesmoke; font-weight: normal; font-size: 100%; } 
     p  { position: absolute; left:80%; top: 85%; font-size: 60%; width: 20%; } 
 
   
@@ -27,13 +27,13 @@
 	
     <div id='map' class = "map"></div>
     <div id="columnchart_values" class = "chart"></div>
-    <h1> COVID-19 CONFIRMED CASES IN THE ARCTIC REGION</h1>
+    <h1> COVID-19 CONFIRMED CASES IN THE ARCTIC (06/05/2020) </h1>
     <p> Sources: Johns Hopkins Coronavirus Resource Center, University of Virginia Biocomplexity Institute, coronavirus-monitor.ru, statista.com, national reports. Illustrations: nytimes.com </p>
 
 
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://d19vzq90twjlae.cloudfront.net/leaflet/v0.7.7/leaflet.js"></script>
-<script src="data_05042020.geojson"></script>
+<script src="data.geojson"></script>
 <script src="Arctctic.geojson"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -74,7 +74,7 @@
     
     
     
-    geojsonLayer = L.geoJson(data_05042020, {
+    geojsonLayer = L.geoJson(data, {
         pointToLayer: function(feature, ll){
             return L.circleMarker(ll, {
                 color: '#FF0000',
@@ -118,12 +118,12 @@
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
         ["Element", "Density", { role: "style" } ],
-        ["Russia", 5794, "#F08080"],
+        ["Russia", 6185, "#F08080"],
         ["Iceland", 1799, "#F08080"],
         ["Sweden", 601, "#F08080"],
-        ["United States", 368, "#F08080"],
-        ["Norway", 360, "#F08080"],
-        ["Finland", 140, "#F08080"],
+        ["United States", 371, "#F08080"],
+        ["Norway", 362, "#F08080"],
+        ["Finland", 190, "#F08080"],
         ["Canada", 16, "#F08080"],
         ["Greenland", 11, "#F08080"]
       ]);
@@ -151,39 +151,37 @@
 </a>
 
 
-
-
-
 <table>
 <tr><th>Region</th><th>Cases</th><th>Deaths</th></tr>
-<tr><td>Murmansk</td><td>1974</td><td>4</td></tr>
+<tr><td>Total</td><td>9535</td><td>107</td></tr>
+<tr><td>Murmansk</td><td>2104</td><td>4</td></tr>
 <tr><td>Iceland</td><td>1799</td><td>10</td></tr>
-<tr><td>Krasnoyarsk</td><td>823</td><td>11</td></tr>
-<tr><td>Yamal-Nenets</td><td>712</td><td>3</td></tr>
-<tr><td>Komi</td><td>682</td><td>7</td></tr>
-<tr><td>Khanty-Mansiy</td><td>467</td><td>4</td></tr>
-<tr><td>Kamchatka</td><td>339</td><td>0</td></tr>
-<tr><td>Vдsterbotten</td><td>330</td><td>16</td></tr>
-<tr><td>Sakha</td><td>311</td><td>4</td></tr>
-<tr><td>Arkhangel'sk</td><td>299</td><td>1</td></tr>
+<tr><td>Krasnoyarsk</td><td>868</td><td>12</td></tr>
+<tr><td>Yamal-Nenets</td><td>820</td><td>3</td></tr>
+<tr><td>Komi</td><td>698</td><td>7</td></tr>
+<tr><td>Khanty-Mansiy</td><td>508</td><td>4</td></tr>
+<tr><td>Kamchatka</td><td>347</td><td>0</td></tr>
+<tr><td>Sakha</td><td>331</td><td>4</td></tr>
+<tr><td>Vasterbotten</td><td>330</td><td>16</td></tr>
+<tr><td>Arkhangel'sk</td><td>305</td><td>1</td></tr>
 <tr><td>Norrbotten</td><td>271</td><td>35</td></tr>
-<tr><td>Troms and Finnmark</td><td>245</td><td>0</td></tr>
-<tr><td>Anchorage</td><td>187</td><td>4</td></tr>
+<tr><td>Troms and Finnmark</td><td>247</td><td>0</td></tr>
+<tr><td>Anchorage</td><td>190</td><td>4</td></tr>
+<tr><td>Magadan</td><td>131</td><td>2</td></tr>
 <tr><td>Pohjois-Pohjanmaa</td><td>122</td><td>0</td></tr>
-<tr><td>Magadan</td><td>116</td><td>2</td></tr>
 <tr><td>Nordland</td><td>115</td><td>0</td></tr>
 <tr><td>Fairbanks North Star</td><td>83</td><td>2</td></tr>
 <tr><td>Lapland</td><td>68</td><td>0</td></tr>
 <tr><td>Nenets</td><td>47</td><td>0</td></tr>
 <tr><td>Juneau</td><td>27</td><td>0</td></tr>
-<tr><td>Chukot</td><td>24</td><td>0</td></tr>
+<tr><td>Chukotka</td><td>26</td><td>0</td></tr>
 <tr><td>Kenai Peninsula</td><td>22</td><td>1</td></tr>
 <tr><td>Matanuska-Susitna</td><td>21</td><td>1</td></tr>
 <tr><td>Ketchikan Gateway</td><td>16</td><td>0</td></tr>
 <tr><td>Greenland</td><td>11</td><td>0</td></tr>
 <tr><td>Yukon</td><td>11</td><td>0</td></tr>
 <tr><td>Northwest Territories</td><td>5</td><td>0</td></tr>
-<tr><td>Petersburg</td><td>4</td><td>1</td></tr>
+<tr><td>Petersburg (AK)</td><td>4</td><td>1</td></tr>
 <tr><td>Prince of Wales-Outer Ketchi</td><td>2</td><td>0</td></tr>
 <tr><td>Bethel</td><td>1</td><td>0</td></tr>
 <tr><td>Kodiak Island</td><td>1</td><td>0</td></tr>
